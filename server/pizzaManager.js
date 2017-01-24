@@ -11,7 +11,7 @@ var menu = [
 		ID: 2,
 		name: "Quattro Stagioni", 
 		price: 8,
-		ingriedentsList: ["pomodoro","mozzarella", "funghi","asparagi","carciofini", "prosciutto cotto", "olive nene", "uovo sodo" ]
+		ingriedentsList: ["pomodoro","mozzarella", "funghi","asparagi","carciofini", "prosciutto cotto", "olive nere", "uovo sodo" ]
 	},
 	{
 		ID: 3,

@@ -1,8 +1,7 @@
 $(document).ready(function()
-{	
-	var baseAddress = "https://polar-coast-16373.herokuapp.com"
-	//var baseAddress = "http://127.0.0.1:5000";
-	//post + Json
+{
+	var baseAddress = "http://127.0.0.1:5000";
+    
 	$("#btn1").click(function(){
 		$.post(baseAddress + "/searchPizza",
 		{

@@ -35,7 +35,7 @@ describe("Test /showList", function() {
     }); 
 });
  
-// Test for /searchStudent
+// Test for /searchPizza
 describe("Test /searchPizza", function() {
 	//set the data
 	var data = {ID: '1'};
@@ -57,7 +57,7 @@ describe("Test /searchPizza", function() {
 	});
 	
 
-	//student non existing
+	//Pizza does not exist
 	data1 = {ID: "10" };
 	it("to returns status code 406", function(done) {
 	  client.post(base_url + "searchPizza/", data1, function(err, res, body) {
