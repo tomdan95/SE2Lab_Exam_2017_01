@@ -1,0 +1,121 @@
+swagger: '2.0'
+info:
+  title: Pizza WS
+  description: A web services that manages the menu of a pizzeria
+  version: "1.0.0"
+host: myserver.it
+schemes:
+  - https
+basePath: /
+produces:
+  - application/json
+consumes:
+  - application/json
+paths:
+  /showList:
+    get:
+      summary: show list of pizzas
+      description: it returns the complete menu
+      responses:
+        200:
+          description: web page with the menu
+          
+  /searchPizza:
+    post:
+      summary: search for a pizza
+      description: it returns the pizza object, given its ID
+      parameters:
+        - name: ID
+          in: formData
+          description: ID of the pizza
+          required: true
+          type: string
+      responses:
+        200:
+          description: pizza object
+          schema: 
+              $ref: "#/definitions/pizza"
+        406:
+          description: ID of error
+          schema: 
+            properties:
+              error:
+                type: integer
+        404:
+          description: no pizza with that ID or name
+          
+  /deletePizza:
+    post:
+      summary: delete a pizza
+      description: it returns a pizza, given its ID or name
+      parameters:
+        - name: ID
+          in: formData
+          description: ID of the pizza
+          required: false
+          type: string
+        - name: name
+          in: formData
+          description: name of the pizza
+          required: false
+          type: string
+      responses:
+        200:
+          description: object of the deleted pizza
+          schema: 
+              $ref: "#/definitions/pizza"
+        406:
+          description: ID of error
+          schema: 
+            properties:
+              error:
+                type: integer
+        404:
+          description: no pizzas with that ID or name
+            
+  /updatePizzasByPrice:
+    post:
+      summary: return pizzas that are updated
+      description: it returns a list of pizza that are updated, with the new values
+      parameters:
+        - name: price
+          in: formData
+          description: price limit to check
+          required: true
+          type: integer
+        - name: increment
+          in: formData
+          description: amount to be added
+          required: true
+          type: integer
+        - name: lower
+          in: formData
+          description: true if increment to all pizza whose increment is lower the amount specified, false if the increment goes to all pizza with the price bigger that the amount specified 
+          required: true
+          type: boolean
+      responses:
+        200:
+          description: list of pizzas modified
+          schema: 
+            type: array
+            items:
+              $ref: "#/definitions/pizza"
+          
+definitions:
+  pizza:
+    properties:
+      ID:
+        type: string
+        description: ID of the pizza
+      name:
+        type: string
+        description: name of the pizza
+      price:
+        type: integer
+        description: price of the pizza
+      ingridients:
+        type: array
+        items: 
+          type: string
+        description: array.
+        
