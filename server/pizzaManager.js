@@ -139,10 +139,35 @@ var insertPizza = function insertPizza(pizza)
 
 //INSERIRE CODICE QUI SOTTO
 
+var updatePizzasByPrice = function updatePizzaByPrice(price, increment, lower){
+	
+	var retMenu=[];
+	
+	if (lower==true){
+		for(i=0; i<menu.lenght; i++){
+			if (menu[i].price>price){
+				menu[i].price = menu[i].price + increment;
+				retMenu.push(menu[i]);
+			}
+		}
+	}
+	else if (lower==false){
+		for(i=0; i<menu.lenght; i++){
+			if (menu[i].price<price){
+				menu[i].price = menu[i].price + increment;
+				retMenu.push(menu[i]);
+			}
+		}
+	}
+	
+	return retMenu;
+}
+
 //export functions
 exports.searchPizzaID = searchPizzaID; 
 exports.searchPizzaName = searchPizzaName; 
 exports.deletePizzaID = deletePizzaID; 
 exports.deletePizzaName = deletePizzaName; 
 exports.insertPizza = insertPizza; 
-exports.getMenu = getMenu; 
+exports.getMenu = getMenu;
+exports.updatePizzasByPrice = updatePizzasByPrice;
