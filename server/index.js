@@ -264,6 +264,66 @@ app.post('/addPizza', function(request, response)
 
 //INSERIRE CODICE QUI SOTTO
 
+app.post('/updatePizzasByPrice', function(request, response) 
+{
+	var headers = {};
+	headers["Access-Control-Allow-Origin"] = "*";
+	headers["Access-Control-Allow-Methods"] = "POST, GET, PUT, DELETE, OPTIONS";
+	headers["Access-Control-Allow-Credentials"] = false;
+	headers["Access-Control-Max-Age"] = '86400'; // 24 hours
+	headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept";
+	headers["Content-Type"] = "application/json";
+
+	var price;
+	var increment;
+	var lower;
+	
+	price=parseFloat(request.body.price);
+	increment=parseFloat(request.body.increment);
+	
+	if(request.body.lower=="true"){
+		lower=true;
+	}
+	else if(request.body.lower=="false"){
+		lower=false;
+	}
+	else{
+		console.log("error2");
+	}
+	
+	console.log(lower);
+	console.log(increment);
+	console.log(price);
+    
+    if (price!=null && increment!=null && lower!=null)
+	{
+		//aceptable input
+		var modPizza = pizzaManager.updatePizzasByPrice(price, increment, lower);
+		console.log(modPizza);
+		console.log(pizzaManager.updatePizzasByPrice(price, increment, lower));
+		//if exists
+		if (modPizza != null)
+		{
+			response.writeHead(200, headers);
+			response.end(JSON.stringify(modPizza));
+		}
+		else
+		{
+			response.writeHead(404, headers);
+			response.end(JSON.stringify());
+		}
+
+	}
+    else    
+	{
+		//unaceptable input
+		response.writeHead(406, headers);
+		response.end(JSON.stringify("1"));
+	}   
+
+});
+
+
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
